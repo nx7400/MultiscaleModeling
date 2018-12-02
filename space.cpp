@@ -331,22 +331,6 @@ void Space::gradientSeed()
 
 void Space::randomWithRadiusSeed()
 {
-//    for(int i = 0; i < tabWidth; i++){
-//        for(int j = 0; j< tabHeight; j++){
-//            previousTab[i][j].seedId = -1;
-//            currentTab[i][j].seedId = -1;
-
-//            previousTab[i][j].state = 0;
-//            currentTab[i][j].state = 0;
-
-//            previousTab[i][j].checked = false;
-//            currentTab[i][j].checked = false;
-
-//            previousTab[i][j].energy = 0;
-//            currentTab[i][j].energy = 0;
-//        }
-//    }
-
     bool seedOk = true;
     int counter = 1;
     int tempI, tempJ;
@@ -401,8 +385,6 @@ void Space::randomWithRadiusSeed()
 
 void Space::holesOnSeedBorder()
 {
-    bool seedOnBorder = false;
-
     bool** borderTab;
 
     borderTab = new bool*[tabWidth];
@@ -418,79 +400,62 @@ void Space::holesOnSeedBorder()
         }
     }
 
-    //std::cout<<"po wypelnieniu tab borderTab"<<std::endl;
-
     for(int i = 1; i < tabWidth-1; i++){
         for(int j = 1; j< tabHeight-1; j++){
 
             if(previousTab[i+1][j].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i-1][j].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i][j+1].seedId!= previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i][j-1].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i+1][j+1].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i-1][j-1].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i+1][j-1].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
 
             if(previousTab[i-1][j+1].seedId != previousTab[i][j].seedId)
             {
-                //seedOnBorder = true;
                 borderTab[i][j] = true;
                 continue;
             }
-
-            //std::cout<<borderTab[i][j];
-
-
         }
-        //std::cout<<std::endl;
     }
 
 
     int counter = 0;
     int tempI, tempJ;
-
-    //std::cout<<"po petli sprawdzjacej"<<std::endl;
 
     while(counter <= numberOfHoles){
 
