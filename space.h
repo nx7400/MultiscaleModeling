@@ -52,8 +52,8 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *);
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
+//    void mousePressEvent(QMouseEvent *e);
+//    void mouseMoveEvent(QMouseEvent *e);
 
 private:
     int tabHeight;
@@ -84,6 +84,7 @@ private:
     int itSeedVonNeuman2(int i, int j);
     int itSeedHexLeft2(int i, int j);
     int itSeedHexRight2(int i, int j);
+    int extensionOfMoore(int i, int j);
 
     QTimer* timer;
 

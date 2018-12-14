@@ -3,11 +3,12 @@
 #include <QMouseEvent>
 #include <QRectF>
 #include <QTimer>
+#include <QDebug>
 #include <qmath.h>
-#include <QtTest/QTest>
 #include <windows.h>
 #include <math.h>
 #include <iostream>
+
 #include "space.h"
 
 Space::Space(QWidget *parent) :
@@ -28,8 +29,7 @@ Space::Space(QWidget *parent) :
     previousTab = new Seed*[tabWidth];
     currentTab = new Seed*[tabWidth];
 
-    for(int i = 0; i < tabWidth; i++)
-    {
+    for(int i = 0; i < tabWidth; i++) {
         previousTab[i] = new Seed[tabHeight];
         currentTab[i]= new Seed[tabHeight];
     }
@@ -166,22 +166,22 @@ void Space::loadFromFile()
 void Space::randomSeed()
 {
 
-    for(int i = 0; i < tabWidth; i++){
-        for(int j = 0; j< tabHeight; j++){
-            previousTab[i][j].seedId = -1;
-            currentTab[i][j].seedId = -1;
+//    for(int i = 0; i < tabWidth; i++){
+//        for(int j = 0; j< tabHeight; j++){
+//            previousTab[i][j].seedId = -1;
+//            currentTab[i][j].seedId = -1;
 
-            previousTab[i][j].state = 0;
-            currentTab[i][j].state = 0;
+//            previousTab[i][j].state = 0;
+//            currentTab[i][j].state = 0;
 
-            previousTab[i][j].checked = false;
-            currentTab[i][j].checked = false;
+//            previousTab[i][j].checked = false;
+//            currentTab[i][j].checked = false;
 
-            previousTab[i][j].energy = 0;
-            currentTab[i][j].energy = 0;
+//            previousTab[i][j].energy = 0;
+//            currentTab[i][j].energy = 0;
 
-        }
-    }
+//        }
+//    }
 
     int counter = 0;
     int tempI, tempJ;
@@ -883,28 +883,28 @@ int Space::itSeedMoore2(int i, int j)
         tempTab[i]=0;
     }
 
-    if(previousTab[i+1][j].state == 1 && previousTab[i+1][j].seedId != -1)
+    if(previousTab[i+1][j].state == 1 && previousTab[i+1][j].seedId != -1 && previousTab[i+1][j].seedId != 1000)
         tempTab[previousTab[i+1][j].seedId]++;
 
-    if(previousTab[i-1][j].state == 1 && previousTab[i-1][j].seedId != -1)
+    if(previousTab[i-1][j].state == 1 && previousTab[i-1][j].seedId != -1 && previousTab[i-1][j].seedId != 1000)
         tempTab[previousTab[i-1][j].seedId]++;
 
-    if(previousTab[i][j+1].state == 1 && previousTab[i][j+1].seedId != -1)
+    if(previousTab[i][j+1].state == 1 && previousTab[i][j+1].seedId != -1  && previousTab[i][j+1].seedId != 1000)
         tempTab[previousTab[i][j+1].seedId]++;
 
-    if(previousTab[i][j-1].state == 1 && previousTab[i][j-1].seedId != -1)
+    if(previousTab[i][j-1].state == 1 && previousTab[i][j-1].seedId != -1 && previousTab[i][j-1].seedId != 1000)
         tempTab[previousTab[i][j-1].seedId]++;
 
-    if(previousTab[i+1][j+1].state == 1 && previousTab[i+1][j+1].seedId != -1)
+    if(previousTab[i+1][j+1].state == 1 && previousTab[i+1][j+1].seedId != -1 && previousTab[i][j-1].seedId != 1000)
         tempTab[previousTab[i+1][j+1].seedId]++;
 
-    if(previousTab[i-1][j-1].state == 1 && previousTab[i-1][j-1].seedId != -1)
+    if(previousTab[i-1][j-1].state == 1 && previousTab[i-1][j-1].seedId != -1 && previousTab[i-1][j-1].seedId != 1000)
         tempTab[previousTab[i-1][j-1].seedId]++;
 
-    if(previousTab[i+1][j-1].state == 1 && previousTab[i+1][j-1].seedId != -1)
+    if(previousTab[i+1][j-1].state == 1 && previousTab[i+1][j-1].seedId != -1 && previousTab[i+1][j-1].seedId != 1000)
         tempTab[previousTab[i+1][j-1].seedId]++;
 
-    if(previousTab[i-1][j+1].state == 1 && previousTab[i-1][j+1].seedId != -1)
+    if(previousTab[i-1][j+1].state == 1 && previousTab[i-1][j+1].seedId != -1 && previousTab[i-1][j+1].seedId != 1000)
         tempTab[previousTab[i-1][j+1].seedId]++;
 
     int max = tempTab[0];
@@ -1035,10 +1035,14 @@ int Space::itSeedHexRight2(int i, int j)
 
 }
 
+int Space::extensionOfMoore(int i, int j)
+{
+
+}
+
 void Space::nextGeneration()
 {
     if(BCType == 0){
-
         counterOfGenerations++;
 
             for(int i = 1; i < tabWidth-1; i++){
@@ -1115,7 +1119,7 @@ void Space::nextGeneration()
                 for(int j = 0; j < tabHeight; j++){
                     previousTab[i][j]=currentTab[i][j];
                 }
-           }
+            }
 
         update();
 
@@ -1126,7 +1130,6 @@ void Space::nextGeneration()
     if(BCType == 1){
 
         counterOfGenerations++;
-
 
             for(int i = 0; i < tabWidth; i++){
                 for(int j = 0; j < tabHeight; j++){
@@ -1270,39 +1273,39 @@ void Space::paintTab(QPainter &p)
 
 }
 
-void Space::mouseMoveEvent(QMouseEvent *e)
-{
-    double cellWidth = static_cast<double>(width())/tabWidth;
-    double cellHeight = static_cast<double>(height())/tabHeight;
+//void Space::mouseMoveEvent(QMouseEvent *e)
+//{
+//    double cellWidth = static_cast<double>(width())/tabWidth;
+//    double cellHeight = static_cast<double>(height())/tabHeight;
 
-    int i = floor(e->y()/cellHeight)+1;
-    int j = floor(e->x()/cellWidth)+1;
-    if(previousTab[i][j].state == 0)
-    {
-        previousTab[i][j].state = 1;
-        previousTab[i][j].seedId = 0;
-        update();
-    }
-}
+//    int i = floor(e->y()/cellHeight)+1;
+//    int j = floor(e->x()/cellWidth)+1;
+//    if(previousTab[i][j].state == 0)
+//    {
+//        previousTab[i][j].state = 1;
+//        previousTab[i][j].seedId = 0;
+//        update();
+//    }
+//}
 
-void Space::mousePressEvent(QMouseEvent *e)
-{
-    double cellWidth = static_cast<double>(width())/tabWidth;
-    double cellHeight = static_cast<double>(height())/tabHeight;
+//void Space::mousePressEvent(QMouseEvent *e)
+//{
+//    double cellWidth = static_cast<double>(width())/tabWidth;
+//    double cellHeight = static_cast<double>(height())/tabHeight;
 
-    int i = floor(e->y()/cellHeight)+1;
-    int j = floor(e->x()/cellWidth)+1;
-    if(previousTab[i][j].state == 0)
-    {
-        previousTab[i][j].state = 1;
-        previousTab[i][j].seedId = 0;
-        update();
-    }
-    else
-    {
-        previousTab[i][j].state = 0;
-        previousTab[i][j].seedId = -1;
-        update();
-    }
+//    int i = floor(e->y()/cellHeight)+1;
+//    int j = floor(e->x()/cellWidth)+1;
+//    if(previousTab[i][j].state == 0)
+//    {
+//        previousTab[i][j].state = 1;
+//        previousTab[i][j].seedId = 0;
+//        update();
+//    }
+//    else
+//    {
+//        previousTab[i][j].state = 0;
+//        previousTab[i][j].seedId = -1;
+//        update();
+//    }
 
-}
+//}
