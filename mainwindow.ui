@@ -165,6 +165,13 @@
        <widget class="QSpinBox" name="numberOfHolesSpinBox"/>
       </item>
       <item>
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Prawdopodobieństwo</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="Line" name="line_4">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

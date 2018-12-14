@@ -62,7 +62,7 @@ private:
     int numberOfGenerations;
     int counterOfGenerations;
 
-    int numberOfSeed;
+    int numberOfSeed; // TODO create vector when this value is set and use this vector to replace tmpTab in many function
     int counterForColor;
     int tempCounter;
     int neighborhoodType;
@@ -75,16 +75,19 @@ private:
     Seed** previousTab;
     Seed** currentTab;
 
-    int itSeedMoore(int i,int j);
-    int itSeedVonNeuman(int i, int j);
+    int itSeedMoore(int i,int j, int threshold = 0);
+    int itSeedFurtherMoore(int i, int j, int threshold = 0);
+    int itSeedVonNeuman(int i, int j, int threshold = 0);
     int itSeedHexLeft(int i, int j);
     int itSeedHexRight(int i, int j);
+    int extensionOfMoore(int i, int j);
 
-    int itSeedMoore2(int i,int j);
-    int itSeedVonNeuman2(int i, int j);
+    int itSeedMoore2(int i,int j, int threshold = 0);
+    int itSeedFurtherMoore2(int i, int j, int threshold = 0);
+    int itSeedVonNeuman2(int i, int j, int threshold = 0);
     int itSeedHexLeft2(int i, int j);
     int itSeedHexRight2(int i, int j);
-    int extensionOfMoore(int i, int j);
+    int extensionOfMoore2(int i, int j);
 
     QTimer* timer;
 

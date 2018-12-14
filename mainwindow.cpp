@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("Heksagonalne prawe");
     ui->comboBox->addItem("Heksagonalne lewe");
     ui->comboBox->addItem("Heksagonalne losowe");
+    ui->comboBox->addItem("Extension Of Moore");
 
     ui->comboBox_2->addItem("Pochłaniające");
     ui->comboBox_2->addItem("Periodyczne");
