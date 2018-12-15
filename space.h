@@ -50,10 +50,13 @@ public:
     void setFileType(int n);
     void loadFromFile();
 
+    int getProbabilityThreshold() const;
+    void setProbabilityThreshold(int value);
+
 protected:
     void paintEvent(QPaintEvent *);
-//    void mousePressEvent(QMouseEvent *e);
-//    void mouseMoveEvent(QMouseEvent *e);
+    //void mousePressEvent(QMouseEvent *e);
+    //void mouseMoveEvent(QMouseEvent *e);
 
 private:
     int tabHeight;
@@ -71,6 +74,7 @@ private:
     int seedRadius;
     int numberOfHoles;
     int maxSeedId;
+    int probabilityThreshold = 10;
 
     Seed** previousTab;
     Seed** currentTab;

@@ -55,6 +55,8 @@ private slots:
 
     void on_randomHolesButton_clicked();
 
+    void on_spinBox_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     Space* space;

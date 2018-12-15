@@ -19,10 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabHeightSpinBox->setMaximum(300);
     ui->generationSpinBox->setMinimum(1);
     ui->generationSpinBox->setMaximum(1000);
+    ui->spinBox->setMinimum(0);
+    ui->spinBox->setMaximum(100);
 
     ui->tabWidthSpinBox->setValue(space->getTabWidth());
     ui->tabHeightSpinBox->setValue(space->getTabHeight());
     ui->generationSpinBox->setValue(space->getNubmerOfGenerations());
+    ui->spinBox->setValue(space->getProbabilityThreshold());
 
     ui->comboBox->addItem("Moore");
     ui->comboBox->addItem("von Neuman");
@@ -149,5 +152,11 @@ void MainWindow::on_loadFileButton_clicked()
 void MainWindow::on_randomHolesButton_clicked()
 {
     space->randomHoles();
+    update();
+}
+
+void MainWindow::on_spinBox_editingFinished()
+{
+    space->setProbabilityThreshold(ui->spinBox->value());
     update();
 }
