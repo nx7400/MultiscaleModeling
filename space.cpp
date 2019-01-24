@@ -1099,37 +1099,41 @@ void Space::nextGeneration()
                 if(previousTab[i][j].state == 0)
                 {
                     if(neighborhoodType == 0)
-                    {
-                        if(itSeedMooreAbsorbing(i,j) != -1)
+                    {   
+                        int tmpSeedId = itSeedMooreAbsorbing(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedMooreAbsorbing(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
 
                     if(neighborhoodType == 1)
-                    {
-                        if(itSeedVonNeumanAbsorbing(i,j) != -1)
+                    {   
+                        int tmpSeedId = itSeedVonNeumanAbsorbing(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedVonNeumanAbsorbing(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
 
                     if(neighborhoodType == 2)
                     {
-                        if(itSeedHexLeftAbsorbing(i,j) != -1)
+                        int tmpSeedId = itSeedHexLeftAbsorbing(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedHexLeftAbsorbing(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
 
                     if(neighborhoodType == 3)
                     {
-                        if(itSeedHexRightAbsorbing(i,j) != -1)
+                        int tmpSeedId = itSeedHexRightAbsorbing(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedHexRightAbsorbing(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
@@ -1141,17 +1145,19 @@ void Space::nextGeneration()
 
                         if(tempRand == 0)
                         {
-                            if(itSeedHexLeftAbsorbing(i,j) != -1)
+                            int tmpSeedId = itSeedHexLeftAbsorbing(i,j);
+                            if(tmpSeedId != -1)
                             {
-                                currentTab[i][j].seedId = itSeedHexLeftAbsorbing(i,j);
+                                currentTab[i][j].seedId = tmpSeedId;
                                 currentTab[i][j].state = 1;
                             }
                         }
                         if(tempRand == 1)
                         {
-                            if(itSeedHexRightAbsorbing(i,j) != -1)
+                            int tmpSeedId = itSeedHexRightAbsorbing(i,j);
+                            if(tmpSeedId != -1)
                             {
-                                currentTab[i][j].seedId = itSeedHexRightAbsorbing(i,j);
+                                currentTab[i][j].seedId = tmpSeedId;
                                 currentTab[i][j].state = 1;
                             }
                         }
@@ -1192,36 +1198,40 @@ void Space::nextGeneration()
                 {
                     if(neighborhoodType == 0)
                     {
-                        if(itSeedMoorePeriodic(i,j) != -1)
+                        int tmpSeedId = itSeedMoorePeriodic(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedMoorePeriodic(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
 
                     if(neighborhoodType == 1)
                     {
-                        if(itSeedVonNeumanPeriodic(i,j) != -1)
+                        int tmpSeedId = itSeedVonNeumanPeriodic(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedVonNeumanPeriodic(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
 
                     if(neighborhoodType == 2)
                     {
-                        if(itSeedHexLeftPeriodic(i,j) != -1)
+                        int tmpSeedId = itSeedHexLeftPeriodic(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedHexLeftPeriodic(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
 
                     if(neighborhoodType == 3)
                     {
-                        if(itSeedHexRightPeriodic(i,j) != -1)
+                        int tmpSeedId = itSeedHexRightPeriodic(i,j);
+                        if(tmpSeedId != -1)
                         {
-                            currentTab[i][j].seedId = itSeedHexRightPeriodic(i,j);
+                            currentTab[i][j].seedId = tmpSeedId;
                             currentTab[i][j].state = 1;
                         }
                     }
@@ -1233,17 +1243,19 @@ void Space::nextGeneration()
 
                         if(tempRand == 0)
                         {
-                            if(itSeedHexLeftPeriodic(i,j) != -1)
+                            int tmpSeedId = itSeedHexLeftPeriodic(i,j);
+                            if(tmpSeedId != -1)
                             {
-                                currentTab[i][j].seedId = itSeedHexLeftPeriodic(i,j);
+                                currentTab[i][j].seedId = tmpSeedId;
                                 currentTab[i][j].state = 1;
                             }
                         }
                         if(tempRand == 1)
                         {
-                            if(itSeedHexRightPeriodic(i,j) != -1)
+                            int tmpSeedId = itSeedHexRightPeriodic(i,j);
+                            if(tmpSeedId != -1)
                             {
-                                currentTab[i][j].seedId = itSeedHexRightPeriodic(i,j);
+                                currentTab[i][j].seedId = tmpSeedId;
                                 currentTab[i][j].state = 1;
                             }
                         }
