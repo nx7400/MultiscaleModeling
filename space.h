@@ -26,8 +26,9 @@ public:
     void setNumberOfSeed(int n);
     void setNeighborhoodType(int n);
     void setBCType(int n);
-    void setSeedRadius(int n);
+    void setInclusionsSize(int n);
     void setNumberOfHoles(int n);
+    void setInclusionsType(int n);
 
     int getTabWidth();
     int getTabHeight();
@@ -35,16 +36,17 @@ public:
     int getNumberOfSeed();
     int getNeighborhoodType();
     int getBCType();
-    int getSeedRadius();
+    int getInclusionsSize();
     int getNumberOfHoles();
     FileManager *getFileManager();
 
     void randomSeed();
     void regularSeed();
     void gradientSeed();
-    void randomWithRadiusSeed();
+
     void holesOnSeedBorder();
     void randomHoles();
+
     void colorBoundaries();
     void clearSpaceBetweenBoundaries();
 
@@ -73,27 +75,28 @@ private:
     int neighborhoodType;
     int tempRand;
     int BCType;
-    int seedRadius;
     int numberOfHoles;
     int maxSeedId;
     int probabilityThreshold = 10;
+    int inclusionsSize;
+    int inclusionsType = 0;
 
     Seed** previousTab;
     Seed** currentTab;
 
-    int itSeedMoore(int i,int j, int threshold = 0);
-    int itSeedFurtherMoore(int i, int j, int threshold = 0);
-    int itSeedVonNeuman(int i, int j, int threshold = 0);
-    int itSeedHexLeft(int i, int j);
-    int itSeedHexRight(int i, int j);
-    int extensionOfMoore(int i, int j);
+    int itSeedMoorePeriodic(int i,int j, int threshold = 0);
+    int itSeedFurtherMoorePeriodic(int i, int j, int threshold = 0);
+    int itSeedVonNeumanPeriodic(int i, int j, int threshold = 0);
+    int itSeedHexLeftPeriodic(int i, int j);
+    int itSeedHexRightPeriodic(int i, int j);
+    int extensionOfMoorePeriodic(int i, int j);
 
-    int itSeedMoore2(int i,int j, int threshold = 0);
-    int itSeedFurtherMoore2(int i, int j, int threshold = 0);
-    int itSeedVonNeuman2(int i, int j, int threshold = 0);
-    int itSeedHexLeft2(int i, int j);
-    int itSeedHexRight2(int i, int j);
-    int extensionOfMoore2(int i, int j);
+    int itSeedMooreAbsorbing(int i,int j, int threshold = 0);
+    int itSeedFurtherMooreAbsorbing(int i, int j, int threshold = 0);
+    int itSeedVonNeumanAbsorbing(int i, int j, int threshold = 0);
+    int itSeedHexLeftAbsorbing(int i, int j);
+    int itSeedHexRightAbsorbing(int i, int j);
+    int extensionOfMooreAbsorbing(int i, int j);
 
     QTimer* timer;
 

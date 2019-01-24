@@ -63,6 +63,13 @@
        </widget>
       </item>
       <item>
+       <widget class="Line" name="line_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_4">
         <property name="text">
          <string>Clolor Boundaries</string>
@@ -149,9 +156,19 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Inclusions Type</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_3"/>
+      </item>
+      <item>
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Radius</string>
+         <string>Size</string>
         </property>
        </widget>
       </item>
@@ -195,7 +212,7 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Type of Neighborhood</string>
+         <string>Neighborhood Type</string>
         </property>
        </widget>
       </item>

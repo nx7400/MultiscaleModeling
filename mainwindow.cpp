@@ -37,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_2->addItem("Absorbing");
     ui->comboBox_2->addItem("Periodic");
 
+    ui->comboBox_3->addItem("Circle");
+    ui->comboBox_3->addItem("Square");
+
     ui->fileTypeComboBox->addItem("Text");
     ui->fileTypeComboBox->addItem("Bitmap");
 
@@ -104,12 +107,12 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    space->randomWithRadiusSeed();
+//    space->randomWithRadiusSeed();
 }
 
 void MainWindow::on_seedRadiusSpinBox_editingFinished()
 {
-    space->setSeedRadius(ui->seedRadiusSpinBox->value());
+    space->setInclusionsSize(ui->seedRadiusSpinBox->value());
     update();
 }
 
@@ -169,4 +172,9 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     space->clearSpaceBetweenBoundaries();
+}
+
+void MainWindow::on_comboBox_3_activated(int index)
+{
+    space->setInclusionsType(index);
 }

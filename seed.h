@@ -9,7 +9,6 @@ public:
     int seedId;
     int state;
     bool checked;
-    int energy;
     QColor seedColor;
 };
 
