@@ -17,28 +17,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidthSpinBox->setMaximum(300);
     ui->tabHeightSpinBox->setMinimum(10);
     ui->tabHeightSpinBox->setMaximum(300);
-    ui->generationSpinBox->setMinimum(1);
-    ui->generationSpinBox->setMaximum(1000);
+    //ui->generationSpinBox->setMinimum(1);
+    //ui->generationSpinBox->setMaximum(1000);
     ui->spinBox->setMinimum(0);
     ui->spinBox->setMaximum(100);
 
     ui->tabWidthSpinBox->setValue(space->getTabWidth());
     ui->tabHeightSpinBox->setValue(space->getTabHeight());
-    ui->generationSpinBox->setValue(space->getNubmerOfGenerations());
+    //ui->generationSpinBox->setValue(space->getNubmerOfGenerations());
     ui->spinBox->setValue(space->getProbabilityThreshold());
 
     ui->comboBox->addItem("Moore");
     ui->comboBox->addItem("von Neuman");
-    ui->comboBox->addItem("Heksagonalne prawe");
-    ui->comboBox->addItem("Heksagonalne lewe");
-    ui->comboBox->addItem("Heksagonalne losowe");
+    ui->comboBox->addItem("Hexagonal right");
+    ui->comboBox->addItem("Hexagonal left");
+    ui->comboBox->addItem("Hexagonal random");
     ui->comboBox->addItem("Extension Of Moore");
 
-    ui->comboBox_2->addItem("Pochłaniające");
-    ui->comboBox_2->addItem("Periodyczne");
+    ui->comboBox_2->addItem("Absorbing");
+    ui->comboBox_2->addItem("Periodic");
 
-    ui->fileTypeComboBox->addItem("Tekstowy");
-    ui->fileTypeComboBox->addItem("Bitmapa");
+    ui->fileTypeComboBox->addItem("Text");
+    ui->fileTypeComboBox->addItem("Bitmap");
 
 
 }
@@ -62,7 +62,7 @@ void MainWindow::on_tabHeightSpinBox_editingFinished()
 
 void MainWindow::on_generationSpinBox_editingFinished()
 {
-    space->setNumberOfGenerations(ui->generationSpinBox->value());
+    //space->setNumberOfGenerations(ui->generationSpinBox->value());
     update();
 }
 
@@ -159,4 +159,14 @@ void MainWindow::on_spinBox_editingFinished()
 {
     space->setProbabilityThreshold(ui->spinBox->value());
     update();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    space->colorBoundaries();
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    space->clearSpaceBetweenBoundaries();
 }

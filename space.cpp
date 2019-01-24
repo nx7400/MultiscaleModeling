@@ -8,6 +8,7 @@
 #include <windows.h>
 #include <math.h>
 #include <iostream>
+#include <functional>
 
 #include "space.h"
 
@@ -48,7 +49,11 @@ Space::Space(QWidget *parent) :
 
     seedIdToColorMap[1000] = QColor(Qt::black);
     colorToSeedIdMap[QColor(Qt::black)] = 1000;
+
+    seedIdToColorMap[-1] = QColor(Qt::white);
+    colorToSeedIdMap[QColor(Qt::white)] = -1;
 }
+
 
 void Space::setTabWidth(int w)
 {
@@ -565,167 +570,110 @@ void Space::randomHoles()
     update();
 }
 
-void Space::monteCarlo()
+void Space::colorBoundaries()
 {
-    int i, j;
-    int counter = 0;
-    int counter2 = 0;
+    bool** borderTab;
+    borderTab = new bool*[tabWidth];
 
-    //std::cout<<"przed while"<<std::endl;
+    for(int i = 0; i < tabWidth; i++)
+        borderTab[i] = new bool[tabHeight];
 
-    while(counter2 <= 2000)
+    for(int i = 0; i < tabWidth; i++)
+        for(int j = 0; j< tabHeight; j++)
+            borderTab[i][j] = false;
+
+    for(int i = 1; i < tabWidth-1; i++)
     {
-        counter = 0;
-        update();
-        //(()-4*tabWidth)
-
-        while(counter <= (tabHeight*tabWidth) )
+        for(int j = 1; j< tabHeight-1; j++)
         {
-            //update();
-            qsrand(qrand());
-
-            i = qrand()%((tabWidth)-2) + 1;
-            j = qrand()%((tabHeight)-2) + 1;
-
-            //std::cout<<"w while"<<std::endl;
-            //std::cout<<i<<" "<<j<<std::endl;
-
-            if(previousTab[i][j].checked == false)
+            if(previousTab[i+1][j].seedId != previousTab[i][j].seedId)
             {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i+1][j].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
+            if(previousTab[i-1][j].seedId != previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i-1][j].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
+            if(previousTab[i][j+1].seedId!= previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i][j+1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
+            if(previousTab[i][j-1].seedId != previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i][j-1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
+            if(previousTab[i+1][j+1].seedId != previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i+1][j+1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
+            if(previousTab[i-1][j-1].seedId != previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i-1][j-1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
+            if(previousTab[i+1][j-1].seedId != previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
 
-                if(previousTab[i+1][j-1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i-1][j+1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                int oldId = previousTab[i][j].seedId;
-                int oldEnergy = previousTab[i][j].energy;
-                previousTab[i][j].energy = 0;
-
-                qsrand(qrand());
-
-                int tempRand = qrand()%3;
-
-                if(tempRand == 0)
-                    previousTab[i][j].seedId = previousTab[i+1][j].seedId;
-                if(tempRand == 1)
-                    previousTab[i][j].seedId = previousTab[i][j+1].seedId;
-                if(tempRand == 2)
-                    previousTab[i][j].seedId = previousTab[i][j-1].seedId;
-                if(tempRand == 3)
-                    previousTab[i][j].seedId = previousTab[i-1][j].seedId;
-
-                //int newId = qrand()%(numberOfSeed);
-
-                // previousTab[i][j].seedId = newId;
-
-                // std::cout<<"nowe id"<<newId<<std::endl;
-                //std::cout<<"stare id"<<oldId<<std::endl;
-
-
-                if(previousTab[i+1][j].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i-1][j].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i][j+1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i][j-1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i+1][j+1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i-1][j-1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i+1][j-1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                if(previousTab[i-1][j+1].seedId != previousTab[i][j].seedId)
-                {
-                    previousTab[i][j].energy++;
-                }
-
-                std::cout<<"stara enegia"<<oldEnergy<<std::endl;
-                std::cout<<"nowa enegia"<<previousTab[i][j].energy<<std::endl;
-
-                if( oldEnergy < previousTab[i][j].energy)
-                {
-                    previousTab[i][j].seedId = oldId;
-                    previousTab[i][j].energy = oldEnergy;
-                    previousTab[i][j].checked = true;
-
-                }
-                else
-                {
-                    previousTab[i][j].checked = true;
-                }
-
-                counter++;
-                //std::cout<<"licznik "<<counter<<std::endl;
-
-                //update();
-
-             }
-
-            //update();
-         }
-
-        counter2++;
-        std::cout<<"licznik2:"<<counter2<<std::endl;
+            if(previousTab[i-1][j+1].seedId != previousTab[i][j].seedId)
+            {
+                borderTab[i][j] = true;
+                continue;
+            }
+        }
     }
+
+
+    for(int i = 0; i < tabWidth; i++)
+    {
+        for(int j = 0; j < tabHeight; j++)
+        {
+            if(borderTab[i][j] == true)
+            {
+                previousTab[i][j].state = 1;
+                previousTab[i][j].seedId = 1000;
+
+                currentTab[i][j].state = 1;
+                currentTab[i][j].seedId = 1000;
+             }
+        }
+    }
+
+    update();
+
+}
+
+void Space::clearSpaceBetweenBoundaries()
+{
+    for(int i = 0; i < tabWidth; i++)
+    {
+        for(int j = 0; j < tabHeight; j++)
+        {
+            if(previousTab[i][j].seedId != 1000)
+            {
+                previousTab[i][j].seedId = -1;
+                currentTab[i][j].seedId = -1;
+
+                previousTab[i][j].state = 1;
+                currentTab[i][j].state = 1;
+             }
+        }
+    }
+
+    update();
 }
 
 ///////////////////////////////////////////////////////////////////Periodic
@@ -1347,8 +1295,13 @@ void Space::nextGeneration()
         }
 
         for(int i = 0; i < tabWidth; i++)
+        {
             for(int j = 0; j < tabHeight; j++)
+            {
                 previousTab[i][j]=currentTab[i][j];
+                // TODO check sum of state to find out if simualtion should stop
+            }
+        }
 
         update();
 
@@ -1400,7 +1353,7 @@ void Space::paintTab(QPainter &p)
 
                 if(previousTab[i][j].seedId == 1000) //TODO - refactor
                 {
-                    p.fillRect(r,QBrush(QColor(0,0,0 )));
+                    p.fillRect(r,QBrush(QColor(0,0,0)));
                     this->image.setPixelColor(i, j, this->seedIdToColorMap[previousTab[i][j].seedId]);
                 }
                 else

@@ -5,6 +5,7 @@
 #include <QColor>
 #include <QImage>
 #include <map>
+#include <functional>
 
 #include "seed.h"
 #include "filemanager.h"
@@ -44,7 +45,8 @@ public:
     void randomWithRadiusSeed();
     void holesOnSeedBorder();
     void randomHoles();
-    void monteCarlo();
+    void colorBoundaries();
+    void clearSpaceBetweenBoundaries();
 
     void saveToFile();
     void setFileType(int n);
@@ -63,7 +65,7 @@ private:
     int tabWidth;
 
     int numberOfGenerations;
-    int counterOfGenerations;
+    int counterOfGenerations; // use this counter to detect end of simulation
 
     int numberOfSeed; // TODO create vector when this value is set and use this vector to replace tmpTab in many function
     int counterForColor;
@@ -98,6 +100,8 @@ private:
     FileManager* fileManager;
     std::map<int, QColor> seedIdToColorMap;
     std::map<QColor, int, std::function<bool(const QColor&, const QColor&)>> colorToSeedIdMap;
+
+    std::function<int(int, int)> neighborhoodTypeCallback;
 
 signals:
 

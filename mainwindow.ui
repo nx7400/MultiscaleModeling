@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1033</width>
-    <height>916</height>
+    <height>942</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,28 +23,21 @@
       <item>
        <widget class="QPushButton" name="randSeedButton">
         <property name="text">
-         <string>Losuj</string>
+         <string>Random</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="regularSeedButton">
         <property name="text">
-         <string>Równomierny </string>
+         <string>Uniform</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>Gradientowy</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Zarodkowanie z promieniem</string>
+         <string>Gradient</string>
         </property>
        </widget>
       </item>
@@ -58,14 +51,28 @@
       <item>
        <widget class="QPushButton" name="randomHolesButton">
         <property name="text">
-         <string>Dziury w losowych miejscach</string>
+         <string>Random Inclusions</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_3">
         <property name="text">
-         <string>Dziury na granicy ziaren</string>
+         <string>Inclusions on Boundaries</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>Clolor Boundaries</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="text">
+         <string>Clear Space Between Boundaries</string>
         </property>
        </widget>
       </item>
@@ -107,7 +114,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Rozmiar tablicy szerokość</string>
+         <string>Width</string>
         </property>
        </widget>
       </item>
@@ -117,7 +124,7 @@
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Rozmiar tablicy wysokość</string>
+         <string>Height</string>
         </property>
        </widget>
       </item>
@@ -125,19 +132,9 @@
        <widget class="QSpinBox" name="tabHeightSpinBox"/>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Liczba generacji</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="generationSpinBox"/>
-      </item>
-      <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Liczba zarodków</string>
+         <string>Number of Nucleons</string>
         </property>
        </widget>
       </item>
@@ -145,9 +142,16 @@
        <widget class="QSpinBox" name="numberOfSeedSpinBox"/>
       </item>
       <item>
+       <widget class="Line" name="line_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Promien</string>
+         <string>Radius</string>
         </property>
        </widget>
       </item>
@@ -157,7 +161,7 @@
       <item>
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>Liczba dziur</string>
+         <string>Number of Inclusions</string>
         </property>
        </widget>
       </item>
@@ -165,9 +169,16 @@
        <widget class="QSpinBox" name="numberOfHolesSpinBox"/>
       </item>
       <item>
+       <widget class="Line" name="line_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_11">
         <property name="text">
-         <string>Prawdopodobieństwo</string>
+         <string>Probability</string>
         </property>
        </widget>
       </item>
@@ -184,7 +195,7 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Rodzaj sąsiedztwa</string>
+         <string>Type of Neighborhood</string>
         </property>
        </widget>
       </item>
@@ -194,7 +205,7 @@
       <item>
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Warunki brzegowe</string>
+         <string>Boundary Conditions</string>
         </property>
        </widget>
       </item>
@@ -211,7 +222,7 @@
       <item>
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Nazwa pliku</string>
+         <string>File Name</string>
         </property>
        </widget>
       </item>
@@ -228,7 +239,7 @@
       <item>
        <widget class="QLabel" name="label_10">
         <property name="text">
-         <string>Typ pliku</string>
+         <string>File Type</string>
         </property>
        </widget>
       </item>
@@ -238,14 +249,14 @@
       <item>
        <widget class="QPushButton" name="saveFileButton">
         <property name="text">
-         <string>Zapisz</string>
+         <string>Save</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="loadFileButton">
         <property name="text">
-         <string>Wczytaj</string>
+         <string>Load</string>
         </property>
        </widget>
       </item>
