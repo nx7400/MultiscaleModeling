@@ -41,8 +41,6 @@ public:
     FileManager *getFileManager();
 
     void randomSeed();
-    void regularSeed();
-    void gradientSeed();
 
     void holesOnSeedBorder();
     void randomHoles();
@@ -59,17 +57,15 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *);
-    //void mousePressEvent(QMouseEvent *e);
-    //void mouseMoveEvent(QMouseEvent *e);
 
 private:
     int tabHeight;
     int tabWidth;
 
     int numberOfGenerations;
-    int counterOfGenerations; // use this counter to detect end of simulation
+    int counterOfGenerations;
 
-    int numberOfSeed; // TODO create vector when this value is set and use this vector to replace tmpTab in many function
+    int numberOfSeed;
     int counterForColor;
     int tempCounter;
     int neighborhoodType;
@@ -87,15 +83,11 @@ private:
     int itSeedMoorePeriodic(int i,int j, int threshold = 0);
     int itSeedFurtherMoorePeriodic(int i, int j, int threshold = 0);
     int itSeedVonNeumanPeriodic(int i, int j, int threshold = 0);
-    int itSeedHexLeftPeriodic(int i, int j);
-    int itSeedHexRightPeriodic(int i, int j);
     int extensionOfMoorePeriodic(int i, int j);
 
     int itSeedMooreAbsorbing(int i,int j, int threshold = 0);
     int itSeedFurtherMooreAbsorbing(int i, int j, int threshold = 0);
     int itSeedVonNeumanAbsorbing(int i, int j, int threshold = 0);
-    int itSeedHexLeftAbsorbing(int i, int j);
-    int itSeedHexRightAbsorbing(int i, int j);
     int extensionOfMooreAbsorbing(int i, int j);
 
     QTimer* timer;

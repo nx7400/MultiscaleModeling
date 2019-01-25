@@ -185,10 +185,6 @@ void Space::clear()
 
             previousTab[i][j].state = 0;
             currentTab[i][j].state = 0;
-
-            previousTab[i][j].checked = false;
-            currentTab[i][j].checked = false;
-
         }
     }
 
@@ -235,12 +231,6 @@ void Space::randomSeed()
 //            previousTab[i][j].state = 0;
 //            currentTab[i][j].state = 0;
 
-//            previousTab[i][j].checked = false;
-//            currentTab[i][j].checked = false;
-
-//            previousTab[i][j].energy = 0;
-//            currentTab[i][j].energy = 0;
-
 //        }
 //    }
 
@@ -258,126 +248,6 @@ void Space::randomSeed()
             previousTab[tempI][tempJ].state = 1;
             previousTab[tempI][tempJ].seedId = counter;
             counter++;
-        }
-    }
-
-    update();
-}
-
-void Space::regularSeed()
-{
-    for(int i = 0; i < tabWidth; i++)
-    {
-        for(int j = 0; j< tabHeight; j++)
-        {
-            previousTab[i][j].seedId = -1;
-            currentTab[i][j].seedId = -1;
-
-            previousTab[i][j].state = 0;
-            currentTab[i][j].state = 0;
-
-            previousTab[i][j].checked = false;
-            currentTab[i][j].checked = false;
-
-        }
-    }
-
-    int counter = 1;
-    int temp = static_cast<int>(sqrt(numberOfSeed));
-
-    int t1 = tabWidth/temp;
-    int t2 = tabHeight/temp;
-
-    for(int i = t1/2; i < tabWidth; i = i + t1)
-    {
-        for(int j = t2/2; j < tabHeight; j = j + t2)
-        {
-            previousTab[i][j].state = 1;
-            previousTab[i][j].seedId = counter;
-            counter++;
-        }
-    }
-
-    update();
-}
-
-void Space::gradientSeed()
-{
-    for(int i = 0; i < tabWidth; i++)
-    {
-        for(int j = 0; j< tabHeight; j++)
-        {
-            previousTab[i][j].seedId = -1;
-            currentTab[i][j].seedId = -1;
-
-            previousTab[i][j].state = 0;
-            currentTab[i][j].state = 0;
-
-            previousTab[i][j].checked = false;
-            currentTab[i][j].checked = false;
-
-        }
-    }
-
-    int counter = 0;
-    int tempI, tempJ;
-    qsrand(qrand());
-
-    int tempHeight = tabHeight/3;
-
-    int numberSeed1 = static_cast<int>(numberOfSeed*0.5);
-    int numberSeed2 = static_cast<int>(numberOfSeed*0.3);
-    int numberSeed3 = static_cast<int>(numberOfSeed*0.2);
-
-    while(counter <= numberSeed1)
-    {
-        tempI = qrand()%tabWidth;
-        tempJ = qrand()%tempHeight;
-
-        if(previousTab[tempI][tempJ].state == 0)
-        {
-            if(tempJ < tempHeight)
-            {
-                previousTab[tempI][tempJ].state = 1;
-                previousTab[tempI][tempJ].seedId = counter;
-                counter++;
-            }
-        }
-    }
-
-    counter = 0;
-
-    while(counter <= numberSeed2)
-    {
-        tempI = qrand()%tabWidth;
-        tempJ = qrand()%((tempHeight*2-tempHeight) + tempHeight);
-
-        if(previousTab[tempI][tempJ].state == 0)
-        {
-            if( tempHeight < tempJ < (tempHeight*2))
-            {
-                previousTab[tempI][tempJ].state = 1;
-                previousTab[tempI][tempJ].seedId = counter;
-                counter++;
-            }
-        }
-    }
-
-    counter = 0;
-
-    while(counter <= numberSeed3)
-    {
-        tempI = qrand()%tabWidth;
-        tempJ = qrand()%((tabHeight-tempHeight*2) + tempHeight*2);
-
-        if(previousTab[tempI][tempJ].state == 0)
-        {
-            if( tempHeight*2 < tempJ < tabHeight)
-            {
-                previousTab[tempI][tempJ].state = 1;
-                previousTab[tempI][tempJ].seedId = counter;
-                counter++;
-            }
         }
     }
 
@@ -763,87 +633,6 @@ int Space::itSeedVonNeumanPeriodic(int i, int j, int threshold)
     return newId;
 }
 
-int Space::itSeedHexLeftPeriodic(int i, int j)
-{
-    int *tempTab = new int[numberOfSeed];
-    for (int i = 0; i < numberOfSeed; i++){
-        tempTab[i]=0;
-    }
-
-    if(previousTab[(tabWidth+i+1)%tabWidth][j].state == 1 && previousTab[(tabWidth+i+1)%tabWidth][j].seedId != -1)
-        tempTab[previousTab[(tabWidth+i+1)%tabWidth][j].seedId]++;
-
-    if(previousTab[(tabWidth+i-1)%tabWidth][j].state == 1 && previousTab[(tabWidth+i-1)%tabWidth][j].seedId != -1)
-        tempTab[previousTab[(tabWidth+i-1)%tabWidth][j].seedId]++;
-
-    if(previousTab[i][(tabHeight+j+1)%tabHeight].state == 1 && previousTab[i][(tabHeight+j+1)%tabHeight].seedId != -1)
-        tempTab[previousTab[i][(tabHeight+j+1)%tabHeight].seedId]++;
-
-    if(previousTab[i][(tabHeight+j-1)%tabHeight].state == 1 && previousTab[i][(tabHeight+j-1)%tabHeight].seedId != -1)
-        tempTab[previousTab[i][(tabHeight+j-1)%tabHeight].seedId]++;
-
-    if(previousTab[(tabWidth+i+1)%tabWidth][(tabHeight+j-1)%tabHeight].state == 1 && previousTab[(tabWidth+i+1)%tabWidth][(tabHeight+j-1)%tabHeight].seedId != -1)
-        tempTab[previousTab[(tabWidth+i+1)%tabWidth][(tabHeight+j-1)%tabHeight].seedId]++;
-
-    if(previousTab[(tabWidth+i-1)%tabWidth][(tabHeight+j+1)%tabHeight].state == 1 && previousTab[(tabWidth+i-1)%tabWidth][(tabHeight+j+1)%tabHeight].seedId != -1)
-        tempTab[previousTab[(tabWidth+i-1)%tabWidth][(tabHeight+j+1)%tabHeight].seedId]++;
-
-    int max = tempTab[0];
-    int newId = -1;
-
-    for(int i = 1; i < numberOfSeed; i++){
-        if(tempTab[i] > max){
-            max=tempTab[i];
-            newId = i;
-        }
-    }
-
-    delete [] tempTab;
-    return newId;
-
-}
-
-int Space::itSeedHexRightPeriodic(int i, int j)
-{
-    int *tempTab = new int[numberOfSeed];
-    for (int i = 0; i < numberOfSeed; i++){
-        tempTab[i]=0;
-    }
-
-    if(previousTab[(tabWidth+i+1)%tabWidth][j].state == 1 && previousTab[(tabWidth+i+1)%tabWidth][j].seedId != -1)
-        tempTab[previousTab[(tabWidth+i+1)%tabWidth][j].seedId]++;
-
-    if(previousTab[(tabWidth+i-1)%tabWidth][j].state == 1 && previousTab[(tabWidth+i-1)%tabWidth][j].seedId != -1)
-        tempTab[previousTab[(tabWidth+i-1)%tabWidth][j].seedId]++;
-
-    if(previousTab[i][(tabHeight+j+1)%tabHeight].state == 1 && previousTab[i][(tabHeight+j+1)%tabHeight].seedId != -1)
-        tempTab[previousTab[i][(tabHeight+j+1)%tabHeight].seedId]++;
-
-    if(previousTab[i][(tabHeight+j-1)%tabHeight].state == 1 && previousTab[i][(tabHeight+j-1)%tabHeight].seedId != -1)
-        tempTab[previousTab[i][(tabHeight+j-1)%tabHeight].seedId]++;
-
-    if(previousTab[(tabWidth+i+1)%tabWidth][(tabHeight+j+1)%tabHeight].state == 1 && previousTab[(tabWidth+i+1)%tabWidth][(tabHeight+j+1)%tabHeight].seedId != -1)
-        tempTab[previousTab[(tabWidth+i+1)%tabWidth][(tabHeight+j+1)%tabHeight].seedId]++;
-
-    if(previousTab[(tabWidth+i-1)%tabWidth][(tabHeight+j-1)%tabHeight].state == 1 && previousTab[(tabWidth+i-1)%tabWidth][(tabHeight+j-1)%tabHeight].seedId != -1)
-        tempTab[previousTab[(tabWidth+i-1)%tabWidth][(tabHeight+j-1)%tabHeight].seedId]++;
-
-
-    int max = tempTab[0];
-    int newId = -1;
-
-    for(int i = 1; i < numberOfSeed; i++){
-        if(tempTab[i] > max){
-            max=tempTab[i];
-            newId = i;
-        }
-    }
-
-    delete [] tempTab;
-    return newId;
-
-}
-
 int Space::extensionOfMoorePeriodic(int i, int j)
 {
     int mooreThreshold = 8;
@@ -984,88 +773,6 @@ int Space::itSeedVonNeumanAbsorbing(int i, int j, int threshold)
 
 }
 
-int Space::itSeedHexLeftAbsorbing(int i, int j)
-{
-    int *tempTab = new int[numberOfSeed];
-    for (int i = 0; i < numberOfSeed; i++){
-        tempTab[i]=0;
-    }
-
-    if(previousTab[i+1][j].state == 1 && previousTab[i+1][j].seedId != -1)
-        tempTab[previousTab[i+1][j].seedId]++;
-
-    if(previousTab[i-1][j].state == 1 && previousTab[i-1][j].seedId != -1)
-        tempTab[previousTab[i-1][j].seedId]++;
-
-    if(previousTab[i][j+1].state == 1 && previousTab[i][j+1].seedId != -1)
-        tempTab[previousTab[i][j+1].seedId]++;
-
-    if(previousTab[i][j-1].state == 1 && previousTab[i][j-1].seedId != -1)
-        tempTab[previousTab[i][j-1].seedId]++;
-
-    if(previousTab[i+1][j-1].state == 1 && previousTab[i+1][j-1].seedId != -1)
-        tempTab[previousTab[i+1][j-1].seedId]++;
-
-    if(previousTab[i-1][j+1].state == 1 && previousTab[i-1][j+1].seedId != -1)
-        tempTab[previousTab[i-1][j+1].seedId]++;
-
-
-    int max = tempTab[0];
-    int newId = -1;
-
-    for(int i = 1; i < numberOfSeed; i++){
-        if(tempTab[i] > max){
-            max=tempTab[i];
-            newId = i;
-        }
-    }
-
-    delete [] tempTab;
-    return newId;
-
-}
-
-int Space::itSeedHexRightAbsorbing(int i, int j)
-{
-    int *tempTab = new int[numberOfSeed];
-    for (int i = 0; i < numberOfSeed; i++){
-        tempTab[i]=0;
-    }
-
-    if(previousTab[i+1][j].state == 1 && previousTab[i+1][j].seedId != -1)
-        tempTab[previousTab[i+1][j].seedId]++;
-
-    if(previousTab[i-1][j].state == 1 && previousTab[i-1][j].seedId != -1)
-        tempTab[previousTab[i-1][j].seedId]++;
-
-    if(previousTab[i][j+1].state == 1 && previousTab[i][j+1].seedId != -1)
-        tempTab[previousTab[i][j+1].seedId]++;
-
-    if(previousTab[i][j-1].state == 1 && previousTab[i][j-1].seedId != -1)
-        tempTab[previousTab[i][j-1].seedId]++;
-
-    if(previousTab[i+1][j+1].state == 1 && previousTab[i+1][j+1].seedId != -1)
-        tempTab[previousTab[i+1][j+1].seedId]++;
-
-    if(previousTab[i-1][j-1].state == 1 && previousTab[i-1][j-1].seedId != -1)
-        tempTab[previousTab[i-1][j-1].seedId]++;
-
-
-    int max = tempTab[0];
-    int newId = -1;
-
-    for(int i = 1; i < numberOfSeed; i++){
-        if(tempTab[i] > max){
-            max=tempTab[i];
-            newId = i;
-        }
-    }
-
-    delete [] tempTab;
-    return newId;
-
-}
-
 int Space::extensionOfMooreAbsorbing(int i, int j)
 {
     int mooreThreshold = 8;
@@ -1120,51 +827,6 @@ void Space::nextGeneration()
 
                     if(neighborhoodType == 2)
                     {
-                        int tmpSeedId = itSeedHexLeftAbsorbing(i,j);
-                        if(tmpSeedId != -1)
-                        {
-                            currentTab[i][j].seedId = tmpSeedId;
-                            currentTab[i][j].state = 1;
-                        }
-                    }
-
-                    if(neighborhoodType == 3)
-                    {
-                        int tmpSeedId = itSeedHexRightAbsorbing(i,j);
-                        if(tmpSeedId != -1)
-                        {
-                            currentTab[i][j].seedId = tmpSeedId;
-                            currentTab[i][j].state = 1;
-                        }
-                    }
-
-                    if(neighborhoodType == 4)
-                    {
-                        qsrand(qrand());
-                        tempRand = qrand()%2;
-
-                        if(tempRand == 0)
-                        {
-                            int tmpSeedId = itSeedHexLeftAbsorbing(i,j);
-                            if(tmpSeedId != -1)
-                            {
-                                currentTab[i][j].seedId = tmpSeedId;
-                                currentTab[i][j].state = 1;
-                            }
-                        }
-                        if(tempRand == 1)
-                        {
-                            int tmpSeedId = itSeedHexRightAbsorbing(i,j);
-                            if(tmpSeedId != -1)
-                            {
-                                currentTab[i][j].seedId = tmpSeedId;
-                                currentTab[i][j].state = 1;
-                            }
-                        }
-                    }
-
-                    if(neighborhoodType == 5)
-                    {
                         int tmpSeedId = extensionOfMooreAbsorbing(i,j);
                         if(tmpSeedId != -1)
                         {
@@ -1176,13 +838,23 @@ void Space::nextGeneration()
             }
         }
 
+        int stateSum = 0;
+
         for(int i = 0; i < tabWidth; i++)
+        {
             for(int j = 0; j < tabHeight; j++)
+            {
                 previousTab[i][j]=currentTab[i][j];
+                stateSum += previousTab[i][j].state;
+            }
+        }
 
         update();
 
-        if(counterOfGenerations==numberOfGenerations)
+        //if(counterOfGenerations==numberOfGenerations)
+            //timer->stop();
+
+        if(stateSum == tabHeight*tabWidth)
             timer->stop();
     }
 
@@ -1218,51 +890,6 @@ void Space::nextGeneration()
 
                     if(neighborhoodType == 2)
                     {
-                        int tmpSeedId = itSeedHexLeftPeriodic(i,j);
-                        if(tmpSeedId != -1)
-                        {
-                            currentTab[i][j].seedId = tmpSeedId;
-                            currentTab[i][j].state = 1;
-                        }
-                    }
-
-                    if(neighborhoodType == 3)
-                    {
-                        int tmpSeedId = itSeedHexRightPeriodic(i,j);
-                        if(tmpSeedId != -1)
-                        {
-                            currentTab[i][j].seedId = tmpSeedId;
-                            currentTab[i][j].state = 1;
-                        }
-                    }
-
-                    if(neighborhoodType == 4)
-                    {
-                        qsrand(qrand());
-                        tempRand = qrand()%2;
-
-                        if(tempRand == 0)
-                        {
-                            int tmpSeedId = itSeedHexLeftPeriodic(i,j);
-                            if(tmpSeedId != -1)
-                            {
-                                currentTab[i][j].seedId = tmpSeedId;
-                                currentTab[i][j].state = 1;
-                            }
-                        }
-                        if(tempRand == 1)
-                        {
-                            int tmpSeedId = itSeedHexRightPeriodic(i,j);
-                            if(tmpSeedId != -1)
-                            {
-                                currentTab[i][j].seedId = tmpSeedId;
-                                currentTab[i][j].state = 1;
-                            }
-                        }
-                    }
-
-                    if(neighborhoodType == 5)
-                    {
                         int tmpSeedId = extensionOfMoorePeriodic(i,j);
                         if(tmpSeedId != -1)
                         {
@@ -1274,18 +901,23 @@ void Space::nextGeneration()
             }
         }
 
+        int stateSum = 0;
+
         for(int i = 0; i < tabWidth; i++)
         {
             for(int j = 0; j < tabHeight; j++)
             {
                 previousTab[i][j]=currentTab[i][j];
-                // TODO check sum of state to find out if simualtion should stop
+                stateSum += previousTab[i][j].state;
             }
         }
 
         update();
 
-        if(counterOfGenerations==numberOfGenerations)
+        //if(counterOfGenerations==numberOfGenerations)
+            //timer->stop();
+
+        if(stateSum == tabHeight*tabWidth)
             timer->stop();
     }
 }
@@ -1331,54 +963,9 @@ void Space::paintTab(QPainter &p)
                 qreal top = (qreal)(cellHeight*j - cellHeight);
                 QRectF r(left, top, (qreal)cellWidth, (qreal)cellHeight);
 
-                if(previousTab[i][j].seedId == 1000) //TODO - refactor
-                {
-                    p.fillRect(r,QBrush(QColor(0,0,0)));
-                    this->image.setPixelColor(i, j, this->seedIdToColorMap[previousTab[i][j].seedId]);
-                }
-                else
-                {
-                    p.fillRect(r,QBrush(this->seedIdToColorMap[previousTab[i][j].seedId]));
-                    this->image.setPixelColor(i, j, this->seedIdToColorMap[previousTab[i][j].seedId]);
-                }
+                p.fillRect(r,QBrush(this->seedIdToColorMap[previousTab[i][j].seedId]));
+                this->image.setPixelColor(i, j, this->seedIdToColorMap[previousTab[i][j].seedId]);
             }
         }
     }
 }
-
-//void Space::mouseMoveEvent(QMouseEvent *e)
-//{
-//    double cellWidth = static_cast<double>(width())/tabWidth;
-//    double cellHeight = static_cast<double>(height())/tabHeight;
-
-//    int i = floor(e->y()/cellHeight)+1;
-//    int j = floor(e->x()/cellWidth)+1;
-//    if(previousTab[i][j].state == 0)
-//    {
-//        previousTab[i][j].state = 1;
-//        previousTab[i][j].seedId = 0;
-//        update();
-//    }
-//}
-
-//void Space::mousePressEvent(QMouseEvent *e)
-//{
-//    double cellWidth = static_cast<double>(width())/tabWidth;
-//    double cellHeight = static_cast<double>(height())/tabHeight;
-
-//    int i = floor(e->y()/cellHeight)+1;
-//    int j = floor(e->x()/cellWidth)+1;
-//    if(previousTab[i][j].state == 0)
-//    {
-//        previousTab[i][j].state = 1;
-//        previousTab[i][j].seedId = 0;
-//        update();
-//    }
-//    else
-//    {
-//        previousTab[i][j].state = 0;
-//        previousTab[i][j].seedId = -1;
-//        update();
-//    }
-
-//}

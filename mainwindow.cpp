@@ -17,21 +17,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidthSpinBox->setMaximum(300);
     ui->tabHeightSpinBox->setMinimum(10);
     ui->tabHeightSpinBox->setMaximum(300);
-    //ui->generationSpinBox->setMinimum(1);
-    //ui->generationSpinBox->setMaximum(1000);
     ui->spinBox->setMinimum(0);
     ui->spinBox->setMaximum(100);
 
     ui->tabWidthSpinBox->setValue(space->getTabWidth());
     ui->tabHeightSpinBox->setValue(space->getTabHeight());
-    //ui->generationSpinBox->setValue(space->getNubmerOfGenerations());
     ui->spinBox->setValue(space->getProbabilityThreshold());
 
     ui->comboBox->addItem("Moore");
     ui->comboBox->addItem("von Neuman");
-    ui->comboBox->addItem("Hexagonal right");
-    ui->comboBox->addItem("Hexagonal left");
-    ui->comboBox->addItem("Hexagonal random");
     ui->comboBox->addItem("Extension Of Moore");
 
     ui->comboBox_2->addItem("Absorbing");
@@ -65,8 +59,6 @@ void MainWindow::on_tabHeightSpinBox_editingFinished()
 
 void MainWindow::on_generationSpinBox_editingFinished()
 {
-    //space->setNumberOfGenerations(ui->generationSpinBox->value());
-    update();
 }
 
 void MainWindow::on_numberOfSeedSpinBox_editingFinished()
@@ -95,19 +87,14 @@ void MainWindow::on_comboBox_2_activated(int index)
 
 void MainWindow::on_regularSeedButton_clicked()
 {
-    space->regularSeed();
-    update();
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    space->gradientSeed();
-    update();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-//    space->randomWithRadiusSeed();
 }
 
 void MainWindow::on_seedRadiusSpinBox_editingFinished()

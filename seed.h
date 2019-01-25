@@ -8,7 +8,6 @@ public:
     Seed();
     int seedId;
     int state;
-    bool checked;
     QColor seedColor;
 };
 

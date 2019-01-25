@@ -117,7 +117,8 @@ void FileManager::saveToBitMap(QImage image)
 
 }
 
-void FileManager::loadFromBitMap(Seed **array, std::function<void(int)> setTabWidth, std::function<void(int)> setTabHeight, std::map<QColor, int, std::function<bool(const QColor&, const QColor&)>> &colorToSeedIdMap)
+void FileManager::loadFromBitMap(Seed **array, std::function<void(int)> setTabWidth, std::function<void(int)> setTabHeight,
+                                 std::map<QColor, int, std::function<bool(const QColor&, const QColor&)>> &colorToSeedIdMap)
 {
     QMessageBox msgBox;
 

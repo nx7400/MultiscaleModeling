@@ -28,20 +28,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="regularSeedButton">
-        <property name="text">
-         <string>Uniform</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Gradient</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="Line" name="line">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
