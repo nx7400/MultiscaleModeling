@@ -223,16 +223,18 @@ void Space::loadFromFile()
 void Space::randomSeed()
 {
 
-//    for(int i = 0; i < tabWidth; i++){
-//        for(int j = 0; j< tabHeight; j++){
-//            previousTab[i][j].seedId = -1;
-//            currentTab[i][j].seedId = -1;
+    for(int i = 0; i < tabWidth; i++)
+    {
+        for(int j = 0; j< tabHeight; j++)
+        {
+            previousTab[i][j].seedId = -1;
+            currentTab[i][j].seedId = -1;
 
-//            previousTab[i][j].state = 0;
-//            currentTab[i][j].state = 0;
+            previousTab[i][j].state = 0;
+            currentTab[i][j].state = 0;
 
-//        }
-//    }
+        }
+    }
 
     int counter = 0;
     int tempI, tempJ;
@@ -323,7 +325,7 @@ void Space::holesOnSeedBorder()
     int counter = 0;
     int tempI, tempJ;
 
-    while(counter <= numberOfHoles)
+    while(counter < numberOfHoles)
     {
         tempI = qrand()%tabWidth;
         tempJ = qrand()%tabHeight;
@@ -370,7 +372,7 @@ void Space::randomHoles()
     int counter = 0;
     int tempI, tempJ;
 
-    while(counter <= numberOfHoles)
+    while(counter < numberOfHoles)
     {
         tempI = qrand()%tabWidth;
         tempJ = qrand()%tabHeight;

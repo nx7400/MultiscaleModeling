@@ -96,8 +96,6 @@ private:
     std::map<int, QColor> seedIdToColorMap;
     std::map<QColor, int, std::function<bool(const QColor&, const QColor&)>> colorToSeedIdMap;
 
-    std::function<int(int, int)> neighborhoodTypeCallback;
-
 signals:
 
 public slots:
