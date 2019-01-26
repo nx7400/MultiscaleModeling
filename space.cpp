@@ -223,18 +223,18 @@ void Space::loadFromFile()
 void Space::randomSeed()
 {
 
-    for(int i = 0; i < tabWidth; i++)
-    {
-        for(int j = 0; j< tabHeight; j++)
-        {
-            previousTab[i][j].seedId = -1;
-            currentTab[i][j].seedId = -1;
+//    for(int i = 0; i < tabWidth; i++)
+//    {
+//        for(int j = 0; j< tabHeight; j++)
+//        {
+//            previousTab[i][j].seedId = -1;
+//            currentTab[i][j].seedId = -1;
 
-            previousTab[i][j].state = 0;
-            currentTab[i][j].state = 0;
+//            previousTab[i][j].state = 0;
+//            currentTab[i][j].state = 0;
 
-        }
-    }
+//        }
+//    }
 
     int counter = 0;
     int tempI, tempJ;
@@ -344,6 +344,11 @@ void Space::holesOnSeedBorder()
                             previousTab[tempI][tempJ].seedId = 1000;
                             previousTab[i][j].state = 1;
                             previousTab[i][j].seedId = 1000;
+
+                            currentTab[tempI][tempJ].state = 1;
+                            currentTab[tempI][tempJ].seedId = 1000;
+                            currentTab[i][j].state = 1;
+                            currentTab[i][j].seedId = 1000;
                         }
                     }
                     else if(inclusionsType == 1)
@@ -354,6 +359,11 @@ void Space::holesOnSeedBorder()
                             previousTab[tempI][tempJ].seedId = 1000;
                             previousTab[i][j].state = 1;
                             previousTab[i][j].seedId = 1000;
+
+                            currentTab[tempI][tempJ].state = 1;
+                            currentTab[tempI][tempJ].seedId = 1000;
+                            currentTab[i][j].state = 1;
+                            currentTab[i][j].seedId = 1000;
                         }
                     }
 
@@ -389,6 +399,11 @@ void Space::randomHoles()
                         previousTab[tempI][tempJ].seedId = 1000;
                         previousTab[i][j].state = 1;
                         previousTab[i][j].seedId = 1000;
+
+                        currentTab[tempI][tempJ].state = 1;
+                        currentTab[tempI][tempJ].seedId = 1000;
+                        currentTab[i][j].state = 1;
+                        currentTab[i][j].seedId = 1000;
                     }
                 }
                 else if(inclusionsType == 1)
@@ -399,6 +414,11 @@ void Space::randomHoles()
                         previousTab[tempI][tempJ].seedId = 1000;
                         previousTab[i][j].state = 1;
                         previousTab[i][j].seedId = 1000;
+
+                        currentTab[tempI][tempJ].state = 1;
+                        currentTab[tempI][tempJ].seedId = 1000;
+                        currentTab[i][j].state = 1;
+                        currentTab[i][j].seedId = 1000;
                     }
                 }
             }
@@ -746,16 +766,16 @@ int Space::itSeedVonNeumanAbsorbing(int i, int j, int threshold)
         tempTab[i]=0;
     }
 
-    if(previousTab[i+1][j].state == 1 && previousTab[i+1][j].seedId != -1)
+    if(previousTab[i+1][j].state == 1 && previousTab[i+1][j].seedId != 1000)
         tempTab[previousTab[i+1][j].seedId]++;
 
-    if(previousTab[i-1][j].state == 1 && previousTab[i-1][j].seedId != -1)
+    if(previousTab[i-1][j].state == 1 && previousTab[i-1][j].seedId != 1000)
         tempTab[previousTab[i-1][j].seedId]++;
 
-    if(previousTab[i][j+1].state == 1 && previousTab[i][j+1].seedId != -1)
+    if(previousTab[i][j+1].state == 1 && previousTab[i][j+1].seedId != 1000)
         tempTab[previousTab[i][j+1].seedId]++;
 
-    if(previousTab[i][j-1].state == 1 && previousTab[i][j-1].seedId != -1)
+    if(previousTab[i][j-1].state == 1 && previousTab[i][j-1].seedId != 1000)
         tempTab[previousTab[i][j-1].seedId]++;
 
 
